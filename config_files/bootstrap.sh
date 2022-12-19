@@ -84,7 +84,15 @@ if [ "$HOSTNAME" == "node-master" ] ; then
 
     # Start mongod
     mongod --bind_ip_all
-    spark-submit --packages org.mongodb.spark:mongo-spark-connector:10.0.5 app_mongodb.py
+    
+    # Store dataset on mongodb
+    spark-submit --packages org.mongodb.spark:mongo-spark-connector:10.0.5 /root/apps/store.py
+
+    # Run application
+    spark-submit --packages org.mongodb.spark:mongo-spark-connector:10.0.5 /root/apps/app_mongodb.py
+
+    # Get results
+    hdfs dfs -get ./resultados ./apps
 else
     sleep 2
 
