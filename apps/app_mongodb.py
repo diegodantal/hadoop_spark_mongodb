@@ -8,7 +8,7 @@ spark = SparkSession(sc)
 spark.sparkContext.setLogLevel('WARN')
 
 discentes = spark.read.format("mongodb").option("database","ufrn").option("collection", "discentes").load()
-print('###Dataset lido do mongodb###')
+print('### DATASET LIDO DO MONGODB ###')
 
 #Quantidade de ingressantes
 total = discentes.count()
@@ -49,3 +49,5 @@ forma_ingresso.write.mode("overwrite").options(header='True', delimiter=';').csv
 ingressantes.write.mode("overwrite").options(header='True', delimiter=';').csv("resultados/ingressantes")
 perc_sexo_por_curso.write.mode("overwrite").options(header='True', delimiter=';').csv("resultados/perc_sexo_curso")
 nivel_ensino.write.mode("overwrite").options(header='True', delimiter=';').csv("resultados/nivel_ensino")
+
+print('### RESULTADOS SALVOS COM SUCESSO ###')

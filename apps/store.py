@@ -9,3 +9,5 @@ df = spark.read.options(header='True', inferSchema='True', delimiter=';').csv("d
 
 df.write.format("mongodb").mode("append").option("database",
 "ufrn").option("collection", "discentes").save()
+
+print('### DATASET ARMAZENADO NO MONGODB ###')

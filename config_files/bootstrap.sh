@@ -83,7 +83,7 @@ if [ "$HOSTNAME" == "node-master" ] ; then
     printf " * ${green}$(tput blink)All set!${reset}\n"
 
     # Start mongod
-    mongod --bind_ip_all
+    mongod --bind_ip_all --fork --logpath /root/config_files/mongod.log
     
     # Store dataset on mongodb
     spark-submit --packages org.mongodb.spark:mongo-spark-connector:10.0.5 /root/apps/store.py
