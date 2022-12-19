@@ -1,3 +1,15 @@
+##This is a modification of the repository: https://github.com/cmdviegas/docker-hadoop-cluster. 
+##Here we made the following changes for running a mongodb consuming pyspark application as follows (in Portuguese):
+
+##No arquivo docker-compose.yml a única modificação foi a exposição da porta 27017 que é a porta padrão do mongodb.
+##No arquivo Dockerfile, foi feita a troca da imagem base de ubuntu:20.04 para mongo:latest. Esta imagem já vem com o mongodb instalado e por sua vez já usa o ubuntu 20.04 como base. 
+##No arquivo bootsrap.sh foram inseridos os seguintes comandos:
+##“hdfs dfs -put /root/apps/discentes-2022.csv” – coloca o dataset no hdfs para ser lido pela aplicação;
+##“mongod --bind_ip_all” inicia o mongod para que a aplicação possa se conectar (a flag –bind_ip_all foi inserida caso houvesse necessidade de fazer uma consulta ao banco de dados de fora dos containers, embora não tenha sido utilizada).
+##“spark-submit --packages org.mongodb.spark:mongo-spark-connector:10.0.5 store.py” – Executa o script store.py com o spark. Esse script é responsável pela leitura do dataset e criação do banco de dados mongodb utilizando o MongoDB Connector for Spark. 
+##“spark-submit --packages org.mongodb.spark:mongo-spark-connector:10.0.5 app_mongodb.py” – Executa o script app_mongodb.py, o qual faz a leitura do banco de dados mongodb e executa algumas consultas e estatísticas do banco de dados.
+##“hdfs dfs -get . ./apps” – salvar os resultados na pasta apps
+
 ## Deploying APACHE HADOOP 3.x.x + APACHE SPARK 3.x.x
 
 This is a script to deploy Apache Hadoop in distributed mode using Docker as infrastructure.
