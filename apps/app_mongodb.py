@@ -23,7 +23,7 @@ forma_ingresso = forma_ingresso.orderBy('Porcentagem (%)',ascending=False)
 total_mulheres = discentes.filter(discentes['sexo'] == 'F').count()
 total_homens = discentes.filter(discentes['sexo'] == 'M').count()
 
-data = [(total_mulheres,total_homens,round(total_mulheres/total,2),round(total_homens/total,2))]
+data = [(total_mulheres,total_homens,round(total_mulheres/total,2),round(total_homens/total,2)*100)]
 
 columns = ["Mulheres","Homens","Mulheres(%)","Homens (%)"]
 ingressantes = spark.createDataFrame(data=data, schema = columns)
